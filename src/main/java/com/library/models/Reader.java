@@ -1,21 +1,51 @@
 package com.library.models;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Reader {
-    private String firstName, secondName, thirdName = null, eMail = null, phoneNumber = null;
     private Integer id;
-    private LocalDate birthDate, registerDate;
+    private String firstName;
+    private String secondName;
+    private String patronymic;
+    private Date birthDate;
+    private Date registrationDate;
+    private Integer debt;
+    private String statusShort;
+    private String eMail;
+    private String phoneNumber;
 
-    public Reader(Integer id, String firstName, String secondName, String thirdName, String eMail, String phoneNumber, LocalDate birthDate, LocalDate registerDate) {
+    public Reader() {
+    }
+
+    public Reader(Integer id,
+                  String firstName,
+                  String secondName,
+                  String patronymic,
+                  Date birthDate,
+                  Date registrationDate,
+                  Integer debt,
+                  String statusShort,
+                  String eMail,
+                  String phoneNumber) {
+
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
-        this.thirdName = thirdName;
+        this.patronymic = patronymic;
+        this.birthDate = birthDate;
+        this.registrationDate = registrationDate;
+        this.debt = debt;
+        this.statusShort = statusShort;
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
-        this.registerDate = registerDate;
+    }
+
+    public Integer getDebt() {
+        return debt;
+    }
+
+    public void setDebt(Integer debt) {
+        this.debt = debt;
     }
 
     public String getFirstName() {
@@ -34,12 +64,12 @@ public class Reader {
         this.secondName = secondName;
     }
 
-    public String getThirdName() {
-        return thirdName;
+    public String getPatronymic() {
+        return patronymic;
     }
 
-    public void setThirdName(String thirdName) {
-        this.thirdName = thirdName;
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
     }
 
     public String geteMail() {
@@ -66,19 +96,27 @@ public class Reader {
         this.id = id;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public String getStatusShort() {
+        return statusShort;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setStatusShort(String statusShort) {
+        this.statusShort = statusShort;
+    }
+
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
-    public LocalDate getRegisterDate() {
-        return registerDate;
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
-    public void setRegisterDate(LocalDate registerDate) {
-        this.registerDate = registerDate;
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
     }
 }
