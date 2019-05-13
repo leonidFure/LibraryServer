@@ -3,16 +3,12 @@ package com.library.dao;
 import com.library.models.Reader;
 import com.library.rowmappers.ReadersRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.sql.Date;
-import java.time.ZoneId;
 import java.util.List;
-
 
 @Transactional
 @Repository
@@ -31,7 +27,7 @@ public class ReadersDaoImpl implements ReadersDao {
                                                     "email, phone_number) " +
                                                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE_READER = "DELETE FROM reader WHERE reader.reader_id = ?";
-    private static final String SQL_UPDATE_READER = "UPDATE Nodes SET name = ?, " +
+    private static final String SQL_UPDATE_READER = "UPDATE reader SET name = ?, " +
                                                     "second_name = ?, patronymic = ?," +
                                                     "bith_date = ?," +
                                                     "registration_date = ?," +
@@ -54,7 +50,11 @@ public class ReadersDaoImpl implements ReadersDao {
 
     @Override
     public Reader getReaderByIdFromDB(Integer id) {
-        return jdbcTemplate.queryForObject(SQL_SELECT_READER_BY_ID, rowMapper, id);
+        try {
+            return jdbcTemplate.queryForObject(SQL_SELECT_READER_BY_ID, rowMapper, id);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     @Override
